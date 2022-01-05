@@ -5,6 +5,7 @@ function initial_config {
   "MAIL_DOMAIN"
   "TLS_CERT_FILE"
   "TLS_KEY_FILE"
+  "RELAY_HOST"
   )
   env_vars_subst=${env_vars[@]/#/$}
   postfix_staging_directory=/tmp/postfix_staging

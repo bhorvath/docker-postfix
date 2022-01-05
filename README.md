@@ -29,6 +29,7 @@ Variable      | Description
 MAIL_DOMAIN   | The domain for which Postfix will be handling mail
 TLS_CERT_FILE | The path to the TLS certificate (this path must be accessible within the container)
 TLS_KEY_FILE  | The path to the TLS key (this path must be accessible within the container)
+RELAY_HOST    | The relay host through which to send outgoing mail
 
 ## Notes
 

@@ -55,10 +55,14 @@ maillog_file = /dev/stdout
 # Turn off backwards compatibility safety net
 compatibility_level = 2
 
+# Send mail through a relay
+relayhost = [$RELAY_HOST]
+
 ### TLS
 
-# Announce STARTTLS, but don't require it
+# Enable and announce STARTTLS, but don't require it
 # (STARTTLS is forced for submission; see master.cf)
+smtp_use_tls = yes
 smtpd_tls_security_level = may
 smtp_tls_security_level = may
 
@@ -66,6 +70,7 @@ smtp_tls_security_level = may
 smtpd_tls_auth_only = yes
 
 # Certificate and key paths
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 smtpd_tls_cert_file = $TLS_CERT_FILE
 smtpd_tls_key_file = $TLS_KEY_FILE
 
@@ -81,6 +86,15 @@ tls_high_cipherlist = EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA256:
 smtp_tls_session_cache_database = btree:/var/lib/postfix/smtp_scache
 
 ### SASL
+
+# Enable SASL authentication
+smtp_sasl_auth_enable = yes
+
+# Disallow methods that allow anonymous authentication
+smtp_sasl_security_options = noanonymous
+
+# Add SASL credentials to this file (make sure to set restrictive permissions)
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 
 # Use Dovecot for SASL auth
 # (SASL auth is only enabled for submission; see master.cf)
